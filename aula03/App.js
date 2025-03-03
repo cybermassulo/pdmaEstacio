@@ -31,7 +31,7 @@ const App = () => {
       <View style={styles.container}>
         {/* Imagem do Logo */}
         <Image 
-          source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} 
+          source={{ uri: 'https://logodownload.org/wp-content/uploads/2014/12/estacio-logo-1.png' }} 
           style={styles.logo} 
         />
 

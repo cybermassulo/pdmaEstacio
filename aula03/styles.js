@@ -14,8 +14,8 @@ export default StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 140,
+    height: 112,
     marginBottom: 20,
   },
   title: {
