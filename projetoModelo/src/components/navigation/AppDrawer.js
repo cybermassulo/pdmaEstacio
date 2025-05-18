@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import PessoasStack  from './PessoasStack';
 import ReunioesStack from './ReunioesStack';
+import SobreStack from './SobreStack';
 import styles from '../../styles/drawerStyles';
 import CustomDrawerContent from './CustomDrawerContent';
 
@@ -25,6 +26,7 @@ export default function AppDrawer() {
           const icons = {
             Reunioes: 'calendar-outline',
             Pessoas:  'people-outline',
+            Sobre:  'information-circle-outline',
           };
           return <Ionicons name={icons[route.name]} size={size} color={color} />;
         },
@@ -46,11 +48,20 @@ export default function AppDrawer() {
         component={ReunioesStack}
         options={{ drawerLabel: 'Reuniões' }}
       />
-
       <Drawer.Screen
         name="Pessoas"
         component={PessoasStack}
         options={{ drawerLabel: 'Pessoas' }}
+      />
+      <Drawer.Screen
+        name="Sobre"
+        component={SobreStack}
+        options={{
+          title: 'Sobre o App',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="information-circle-outline" size={size} color={color} />
+          ),
+        }}
       />
     </Drawer.Navigator>
   );

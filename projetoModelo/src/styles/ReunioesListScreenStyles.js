@@ -66,4 +66,20 @@ export default StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    gap: 12,
+  },
+  actionButton: {
+    backgroundColor: '#0077cc',
+    borderRadius: 50,
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 10,
+  },
 })

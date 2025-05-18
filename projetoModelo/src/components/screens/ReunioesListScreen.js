@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
+import { exportarCSV } from '../../utils/csvExport';
 
 import styles from '../../styles/ReunioesListScreenStyles'
 import { loadReunioes, saveReunioes } from '../../storage/reunioesStorage'
@@ -101,12 +102,21 @@ export default function ReunioesListScreen({ navigation }) {
           </Text>
         }
       />
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => navigation.navigate('ReuniaoForm')}
-      >
-        <Ionicons name="add" size={32} color="white" />
-      </TouchableOpacity>
+      <View style={styles.buttonRow}>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => exportarCSV(reunioes)}
+        >
+          <Ionicons name="download-outline" size={28} color="white" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => navigation.navigate('ReuniaoForm')}
+        >
+          <Ionicons name="add" size={32} color="white" />
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
