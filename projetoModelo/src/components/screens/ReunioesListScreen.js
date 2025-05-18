@@ -9,9 +9,9 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
 
-import styles from '../styles/ReunioesListScreenStyles'
-import { loadReunioes, saveReunioes } from '../storage/reunioesStorage'
-import { formatDateTime } from '../utils/dateHelpers'
+import styles from '../../styles/ReunioesListScreenStyles'
+import { loadReunioes, saveReunioes } from '../../storage/reunioesStorage'
+import { formatDateTime } from '../../utils/dateHelpers'
 
 export default function ReunioesListScreen({ navigation }) {
   const [reunioes, setReunioes] = useState([])

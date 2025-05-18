@@ -6,7 +6,7 @@ import ReunioesListScreen   from '../screens/ReunioesListScreen';
 import ReuniaoFormScreen    from '../screens/ReuniaoFormScreen';
 import ReuniaoConfirmScreen from '../screens/ReuniaoConfirmScreen';
 import ReuniaoDetailScreen  from '../screens/ReuniaoDetailScreen';
-import { COLORS } from '../styles/drawerStyles';
+import { COLORS } from '../../styles/drawerStyles';
 
 const Stack = createStackNavigator();
 

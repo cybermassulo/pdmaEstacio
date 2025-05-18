@@ -9,9 +9,9 @@ import {
 } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Checkbox from 'expo-checkbox'
-import styles from '../styles/ReuniaoFormScreenStyles'
-import { loadPessoas } from '../storage/pessoasStorage'
-import { loadReunioes } from '../storage/reunioesStorage'
+import styles from '../../styles/ReuniaoFormScreenStyles'
+import { loadPessoas } from '../../storage/pessoasStorage'
+import { loadReunioes } from '../../storage/reunioesStorage'
 
 export default function ReuniaoFormScreen({ route, navigation }) {
   // parâmetros vindos da navegação

@@ -9,8 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import PessoasStack  from './PessoasStack';
 import ReunioesStack from './ReunioesStack';
-import styles from '../styles/drawerStyles';
-import LogoImage from '../img/logo.png';
+import styles from '../../styles/drawerStyles';
 import CustomDrawerContent from './CustomDrawerContent';
 
 const Drawer = createDrawerNavigator();

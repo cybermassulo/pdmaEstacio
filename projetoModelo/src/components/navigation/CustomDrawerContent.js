@@ -4,8 +4,8 @@ import {
   DrawerContentScrollView,
   DrawerItemList
 } from '@react-navigation/drawer';
-import LogoImage from '../img/logo.png';
-import styles from '../styles/drawerStyles';
+import LogoImage from '../../img/logo.png';
+import styles from '../../styles/drawerStyles';
 
 export default function CustomDrawerContent(props) {
   

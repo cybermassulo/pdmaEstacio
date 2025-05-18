@@ -6,9 +6,9 @@ import {
   loadPessoas,
   deletePessoa,
   clearAllStorage,
-} from '../storage/pessoasStorage';
+} from '../../storage/pessoasStorage';
 
-import styles from '../styles/PessoasListScreenStyles';
+import styles from '../../styles/PessoasListScreenStyles';
 
 export default function PessoasListScreen({ navigation }) {
   const [pessoas, setPessoas] = useState([]);

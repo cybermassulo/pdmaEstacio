@@ -4,7 +4,7 @@ import { DrawerToggleButton }  from '@react-navigation/drawer';
 
 import PessoasListScreen from '../screens/PessoasListScreen';
 import PessoaFormScreen  from '../screens/PessoaFormScreen';
-import { COLORS }        from '../styles/drawerStyles';
+import { COLORS }        from '../../styles/drawerStyles';
 
 const Stack = createStackNavigator();
 

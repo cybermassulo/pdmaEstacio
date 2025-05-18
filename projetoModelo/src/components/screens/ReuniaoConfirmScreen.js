@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import uuid from 'react-native-uuid';
 
-import styles from '../styles/ReuniaoConfirmScreenStyles';
-import { loadReunioes, saveReunioes } from '../storage/reunioesStorage';
-import { loadPessoas } from '../storage/pessoasStorage';
-import { formatDateTime } from '../utils/dateHelpers';
+import styles from '../../styles/ReuniaoConfirmScreenStyles';
+import { loadReunioes, saveReunioes } from '../../storage/reunioesStorage';
+import { loadPessoas } from '../../storage/pessoasStorage';
+import { formatDateTime } from '../../utils/dateHelpers';
 
 export default function ReuniaoConfirmScreen({ route, navigation }) {
   const { reuniaoDraft } = route.params;

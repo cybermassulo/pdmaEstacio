@@ -8,13 +8,13 @@ import {
   Alert
 } from 'react-native';
 
-import styles from '../styles/ReuniaoDetailScreenStyles';
+import styles from '../../styles/ReuniaoDetailScreenStyles';
 import {
   loadReunioes,
   deleteReuniao
-} from '../storage/reunioesStorage';
-import { loadPessoas } from '../storage/pessoasStorage';
-import { formatDateTime } from '../utils/dateHelpers';
+} from '../../storage/reunioesStorage';
+import { loadPessoas } from '../../storage/pessoasStorage';
+import { formatDateTime } from '../../utils/dateHelpers';
 
 export default function ReuniaoDetailScreen({ route, navigation }) {
   // receber corretamente o id (podendo vir como reuniaoId ou id)

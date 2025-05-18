@@ -11,15 +11,15 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import uuid from 'react-native-uuid';
 
-import styles from '../styles/PessoaFormScreenStyles';
-import { savePessoas, loadPessoas } from '../storage/pessoasStorage';
+import styles from '../../styles/PessoaFormScreenStyles';
+import { savePessoas, loadPessoas } from '../../storage/pessoasStorage';
 import {
   validateEmail,
   validateCPF,
   maskCPF,
   maskPhone,
   validatePhone
-} from '../utils/validation';
+} from '../../utils/validation';
 
 export default function PessoaFormScreen({ navigation, route }) {
   const initialForm = { nome:'', email:'', telefone:'', cpf:'', papel:'popular' };
