@@ -19,13 +19,15 @@ export default function ReunioesListScreen({ navigation }) {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    fetchReunioes();
+    if (isFocused) {
+      fetchReunioes();
+    }
   }, [isFocused]);
 
   async function fetchReunioes() {
     const all = await loadReunioes();
-    // ordenar cronologicamente pelo campo date (ISO string)
-    all.sort((a, b) => new Date(a.date) - new Date(b.date));
+    // ordena cronologicamente pela data
+    all.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
     setReunioes(all);
   }
 
@@ -57,27 +59,40 @@ export default function ReunioesListScreen({ navigation }) {
     navigation.navigate('ReuniaoDetail', { reuniaoId: id });
   };
 
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <View style={styles.info}>
-        <Text style={styles.pauta}>{item.pauta}</Text>
-        <Text style={styles.date}>
-          {new Date(item.date).toLocaleString()}
-        </Text>
+  const renderItem = ({ item }) => {
+    const dt = new Date(item.dataHora);
+    return (
+      <View style={styles.itemContainer}>
+        <View style={styles.info}>
+          {/* Assunto */}
+          <Text style={styles.assunto}>{item.assunto}</Text>
+          {/* Pauta */}
+          <Text style={styles.pauta}>{item.pauta}</Text>
+          {/* Data e Hora */}
+          <View style={styles.datetimeRow}>
+            <Text style={styles.date}>{dt.toLocaleDateString()}</Text>
+            <Text style={styles.time}>{dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
+          </View>
+          {/* Número de convidados */}
+          <Text style={styles.participants}>
+            Convidados: {item.convidados?.length ?? 0}
+          </Text>
+        </View>
+
+        <View style={styles.actions}>
+          <TouchableOpacity onPress={() => handleDetails(item.id)} style={styles.iconButton}>
+            <Ionicons name="information-circle-outline" size={24} color="#007AFF" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleEdit(item.id)} style={styles.iconButton}>
+            <Ionicons name="create-outline" size={24} color="#34C759" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleDelete(item.id)} style={styles.iconButton}>
+            <Ionicons name="trash-outline" size={24} color="#FF3B30" />
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.actions}>
-        <TouchableOpacity onPress={() => handleDetails(item.id)}>
-          <Ionicons name="information-circle-outline" size={24} color="#007AFF" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleEdit(item.id)}>
-          <Ionicons name="create-outline" size={24} color="#34C759" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleDelete(item.id)}>
-          <Ionicons name="trash-outline" size={24} color="#FF3B30" />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -86,9 +101,12 @@ export default function ReunioesListScreen({ navigation }) {
         keyExtractor={item => item.id}
         renderItem={renderItem}
         ListEmptyComponent={
-          <Text style={styles.emptyText}>Nenhum agendamento encontrado.</Text>
+          <Text style={styles.emptyText}>Nenhum agendamento encontrado.ListScree</Text>
         }
+        contentContainerStyle={reunioes.length === 0 && { flex: 1, justifyContent: 'center', alignItems: 'center' }}
       />
+
+      {/* botão flutuante para agendar nova reunião */}
       <TouchableOpacity
         style={styles.addButton}
         onPress={() => navigation.navigate('ReuniaoForm')}

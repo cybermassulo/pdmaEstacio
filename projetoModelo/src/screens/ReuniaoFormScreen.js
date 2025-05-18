@@ -1,104 +1,159 @@
-// src/screens/ReunioesListScreen.js
+// src/screens/ReuniaoFormScreen.js
 
 import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  FlatList,
+  TextInput,
   TouchableOpacity,
-  Alert,
+  Platform,
+  ScrollView,
+  Alert
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import Checkbox from 'expo-checkbox';
 import { Ionicons } from '@expo/vector-icons';
-import { useIsFocused } from '@react-navigation/native';
+import { loadPessoas } from '../storage/pessoasStorage';
 
-import styles from '../styles/ReunioesListScreenStyles';
-import {
-  loadReunioes,
-  deleteReuniao
-} from '../storage/reunioesStorage';
-import { formatDate, formatTime } from '../utils/validation';
+import styles from '../styles/ReuniaoFormScreenStyles';
 
-export default function ReunioesListScreen({ navigation }) {
-  const [reunioes, setReunioes] = useState([]);
-  const isFocused = useIsFocused();
+export default function ReuniaoFormScreen({ navigation, route }) {
+  // se vier reuniaoId, vamos editar, caso contrário é novo
+  const { reuniaoId } = route.params || {};
 
-  // Recarrega sempre que a tela voltar a ficar em foco
+  const [assunto, setAssunto] = useState('');
+  const [pauta, setPauta] = useState('');
+  const [dataHora, setDataHora] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
+  const [mode, setMode] = useState('date'); // 'date' ou 'time'
+  const [pessoas, setPessoas] = useState([]);
+  const [convidados, setConvidados] = useState([]);
+
   useEffect(() => {
-    if (isFocused) {
-      carregarReunioes();
+    // carrega lista de pessoas para convidar
+    (async () => {
+      const all = await loadPessoas();
+      setPessoas(all);
+    })();
+    // se tiver edição, poderia carregar aqui a reunião existente…
+    // Exemplo:
+    // if (reuniaoId) { carregar do storage e preencher estados }
+  }, []);
+
+  const onChangeDateTime = (event, selected) => {
+    setShowPicker(false);
+    if (event.type === 'dismissed') return;
+    if (mode === 'date') {
+      // escolheu data: atualiza e abre time
+      const newDate = selected || dataHora;
+      setDataHora(prev => {
+        const dt = new Date(prev);
+        dt.setFullYear(newDate.getFullYear(), newDate.getMonth(), newDate.getDate());
+        return dt;
+      });
+      // agora pega hora
+      setMode('time');
+      setShowPicker(true);
+    } else {
+      // escolheu hora
+      const newTime = selected || dataHora;
+      setDataHora(prev => {
+        const dt = new Date(prev);
+        dt.setHours(newTime.getHours(), newTime.getMinutes());
+        return dt;
+      });
     }
-  }, [isFocused]);
+  };
 
-  async function carregarReunioes() {
-    const data = await loadReunioes();
-    // ordena cronologicamente
-    data.sort((a, b) => new Date(a.data) - new Date(b.data));
-    setReunioes(data);
-  }
+  const openPicker = () => {
+    setMode('date');
+    setShowPicker(true);
+  };
 
-  function handleEdit(id) {
-    navigation.navigate('ReuniaoForm', { reuniaoId: id });
-  }
+  const toggleConvidado = (cpf) => {
+    setConvidados(prev => {
+      if (prev.includes(cpf)) {
+        return prev.filter(c => c !== cpf);
+      } else {
+        return [...prev, cpf];
+      }
+    });
+  };
 
-  function handleDelete(id) {
-    Alert.alert(
-      'Confirmar exclusão',
-      'Deseja realmente excluir este agendamento?',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Excluir',
-          style: 'destructive',
-          onPress: async () => {
-            await deleteReuniao(id);
-            carregarReunioes();
-          }
-        }
-      ]
-    );
-  }
-
-  function renderItem({ item }) {
-    return (
-      <View style={styles.itemContainer}>
-        <View style={styles.headerRow}>
-          <Text style={styles.assunto}>{item.assunto}</Text>
-          <View style={styles.actions}>
-            <TouchableOpacity onPress={() => handleEdit(item.id)}>
-              <Ionicons name="create-outline" size={20} color="#555" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleDelete(item.id)} style={styles.deleteIcon}>
-              <Ionicons name="trash-outline" size={20} color="#c00" />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <Text style={styles.pauta}>{item.pauta}</Text>
-        <Text style={styles.datetime}>
-          {formatDate(item.data)} às {formatTime(item.data)}
-        </Text>
-        <Text style={styles.guests}>Convidados: {item.convidados.length}</Text>
-      </View>
-    );
-  }
+  const handleConfirm = () => {
+    if (!assunto.trim() || !pauta.trim() || convidados.length === 0) {
+      Alert.alert('Erro', 'Preencha todos os campos e selecione pelo menos um convidado.');
+      return;
+    }
+    // navega pra tela de confirmação
+    navigation.navigate('ReuniaoConfirm', {
+      agendamento: {
+        id: reuniaoId,
+        assunto,
+        pauta,
+        dataHora: dataHora.toISOString(),
+        convidados
+      }
+    });
+  };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={reunioes}
-        keyExtractor={r => r.id}
-        renderItem={renderItem}
-        contentContainerStyle={styles.list}
-        ListEmptyComponent={
-          <Text style={styles.empty}>Nenhum agendamento encontrado.</Text>
-        }
+    <ScrollView contentContainerStyle={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back" size={24} color="#007AFF" />
+      </TouchableOpacity>
+
+      <Text style={styles.label}>Assunto *</Text>
+      <TextInput
+        style={styles.input}
+        value={assunto}
+        onChangeText={setAssunto}
+        placeholder="Digite o assunto"
       />
 
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => navigation.navigate('ReuniaoForm')}
-      >
-        <Ionicons name="add" size={28} color="#fff" />
+      <Text style={styles.label}>Pauta *</Text>
+      <TextInput
+        style={[styles.input, { height: 100 }]}
+        value={pauta}
+        onChangeText={setPauta}
+        placeholder="Descreva a pauta"
+        multiline
+      />
+
+      <Text style={styles.label}>Data e Hora *</Text>
+      <TouchableOpacity style={styles.dateButton} onPress={openPicker}>
+        <Text style={styles.dateText}>
+          {dataHora.toLocaleDateString()} {dataHora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        </Text>
+        <Ionicons name="calendar" size={20} color="#333" style={{ marginLeft: 8 }} />
       </TouchableOpacity>
-    </View>
+      {showPicker && (
+        <DateTimePicker
+          value={dataHora}
+          mode={mode}
+          display="default"
+          onChange={onChangeDateTime}
+        />
+      )}
+
+      <Text style={styles.label}>Convidados *</Text>
+      {pessoas.length === 0 && (
+        <Text style={styles.emptyText}>Cadastre pessoas primeiro em “Pessoas”.</Text>
+      )}
+      {pessoas.map(p => (
+        <View key={p.id} style={styles.checkboxRow}>
+          <Checkbox
+            value={convidados.includes(p.cpf)}
+            onValueChange={() => toggleConvidado(p.cpf)}
+            style={styles.checkbox}
+          />
+          <Text style={styles.checkboxLabel}>{p.nome} ({p.cpf})</Text>
+        </View>
+      ))}
+
+      <TouchableOpacity style={styles.confirmButton} onPress={handleConfirm}>
+        <Text style={styles.confirmButtonText}>Confirmar Agendamento</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
