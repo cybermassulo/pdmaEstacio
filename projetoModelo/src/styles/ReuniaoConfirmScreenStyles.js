@@ -1,46 +1,74 @@
 // src/styles/ReuniaoConfirmScreenStyles.js
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
+    padding: 20,
+    backgroundColor: '#ffffff',
+    flexGrow: 1,
   },
-  header: {
-    fontSize: 20,
+  title: {
+    fontSize: 22,
+    fontWeight: '700',
+    marginBottom: 20,
+    color: '#333333',
+    textAlign: 'center',
+  },
+  section: {
+    marginBottom: 16,
+  },
+  label: {
+    fontSize: 14,
     fontWeight: '600',
-    marginBottom: 12,
+    color: '#555555',
+    marginBottom: 4,
   },
-  fieldLabel: {
+  value: {
     fontSize: 16,
-    marginTop: 8,
+    color: '#222222',
+    marginBottom: 8,
+    lineHeight: 22,
   },
-  fieldText: {
+  convidado: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 6,
+  },
+  bullet: {
+    fontSize: 18,
+    lineHeight: 22,
+    marginRight: 6,
+    color: '#007AFF',
+  },
+  convidadoText: {
     fontSize: 16,
-    marginVertical: 4,
-    color: '#333',
+    color: '#222222',
+    flexShrink: 1,
+    lineHeight: 22,
   },
-  buttonContainer: {
+  buttonsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 24,
+    marginTop: 30,
   },
-  button: {
+  backButton: {
     flex: 1,
-    marginHorizontal: 4,
+    marginRight: 10,
     paddingVertical: 12,
+    backgroundColor: '#EEEEEE',
     borderRadius: 6,
-    alignItems: 'center',
-  },
-  cancelButton: {
-    backgroundColor: '#ccc',
   },
   confirmButton: {
+    flex: 1,
+    marginLeft: 10,
+    paddingVertical: 12,
     backgroundColor: '#007AFF',
+    borderRadius: 6,
   },
   buttonText: {
-    color: '#fff',
     fontSize: 16,
+    fontWeight: '600',
+    color: '#ffffff',
+    textAlign: 'center',
   },
-});
+})

@@ -1,53 +1,69 @@
-// src/styles/ReunioesListScreenStyles.js
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f7f7f7',
   },
   itemContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderBottomWidth: 1,
-    borderColor: '#DDD',
+    backgroundColor: '#ffffff',
+    padding: 16,
+    marginHorizontal: 16,
+    marginVertical: 8,
+    borderRadius: 8,
+    elevation: 2, // sombra Android
+    shadowColor: '#000', // sombra iOS
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   info: {
     flex: 1,
   },
   pauta: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
+    color: '#222222',
     marginBottom: 4,
   },
   date: {
     fontSize: 14,
-    color: '#666',
+    color: '#555555',
+  },
+  time: {
+    fontSize: 14,
+    color: '#555555',
+    marginBottom: 4,
+  },
+  convidados: {
+    fontSize: 12,
+    color: '#888888',
   },
   actions: {
-    flexDirection: 'row',
-    width: 96,
     justifyContent: 'space-between',
+    marginLeft: 12,
   },
   emptyText: {
     textAlign: 'center',
-    marginTop: 20,
-    fontSize: 16,
-    color: '#999',
+    marginTop: 32,
+    color: '#999999',
+    fontSize: 14,
   },
   addButton: {
     position: 'absolute',
-    right: 20,
-    bottom: 30,
+    right: 24,
+    bottom: 24,
+    backgroundColor: '#007AFF',
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#007AFF',
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
-});
+})

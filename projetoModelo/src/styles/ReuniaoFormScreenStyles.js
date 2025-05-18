@@ -1,69 +1,55 @@
-import { StyleSheet } from 'react-native';
+// src/styles/ReuniaoFormScreenStyles.js
+import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
+    flexGrow: 1,
+    padding: 20,
+    backgroundColor: '#ffffff',
   },
   label: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
     marginBottom: 8,
-    color: '#333',
+    color: '#333333',
+  },
+  pickerButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    borderRadius: 6,
+    backgroundColor: '#f5f5f5',
+    marginBottom: 16,
+  },
+  pickerText: {
+    fontSize: 16,
+    color: '#333333',
   },
   input: {
+    height: 44,
     borderWidth: 1,
-    borderColor: '#CCC',
-    borderRadius: 4,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    fontSize: 16,
-    marginBottom: 12,
-    color: '#000',
-  },
-  textArea: {
-    borderWidth: 1,
-    borderColor: '#CCC',
-    borderRadius: 4,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    fontSize: 16,
-    marginBottom: 12,
-    color: '#000',
-    height: 100,
-    textAlignVertical: 'top',
-  },
-  picker: {
-    borderWidth: 1,
-    borderColor: '#CCC',
-    borderRadius: 4,
-    marginBottom: 12,
-  },
-  dateTimeContainer: {
-    borderWidth: 1,
-    borderColor: '#CCC',
-    borderRadius: 4,
-    padding: 12,
-    marginBottom: 12,
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 14,
+    borderColor: '#cccccc',
     borderRadius: 6,
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  buttonDisabled: {
-    backgroundColor: '#AAA',
-  },
-  buttonText: {
-    color: '#FFF',
+    paddingHorizontal: 12,
+    marginBottom: 16,
+    backgroundColor: '#f5f5f5',
     fontSize: 16,
-    fontWeight: '500',
   },
-  error: {
-    color: '#D32F2F',
-    marginBottom: 8,
+  convidadoItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 4,
   },
-});
+  convidadoText: {
+    marginLeft: 8,
+    fontSize: 16,
+    color: '#555555',
+  },
+  reviewButton: {
+    marginTop: 24,
+    borderRadius: 6,
+    overflow: 'hidden', // para o button respeitar o borderRadius
+    backgroundColor: '#007AFF',
+  },
+})
