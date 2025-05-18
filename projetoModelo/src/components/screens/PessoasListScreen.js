@@ -13,7 +13,6 @@ import styles from '../../styles/PessoasListScreenStyles';
 export default function PessoasListScreen({ navigation }) {
   const [pessoas, setPessoas] = useState([]);
 
-  // Carrega lista sempre que a tela ganhar foco
   const carregarPessoas = async () => {
     const all = await loadPessoas();
     setPessoas(all);
@@ -24,20 +23,8 @@ export default function PessoasListScreen({ navigation }) {
     return unsubscribe;
   }, [navigation]);
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity
-          style={{ marginRight: 16 }}
-          onPress={() => navigation.navigate('PessoaForm')}
-        >
-          <Ionicons name="add-circle-outline" size={28} color="#007AFF" />
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation]);
+
   
-  // Excluir com confirmação
   const handleDelete = (id) => {
     Alert.alert(
       'Confirmação',
@@ -56,7 +43,6 @@ export default function PessoasListScreen({ navigation }) {
     );
   };
 
-  // Navegar para o form em modo edição
   const handleEdit = (item) => {
     navigation.navigate('PessoaForm', { pessoa: item });
   };
@@ -81,19 +67,26 @@ export default function PessoasListScreen({ navigation }) {
   );
 
   return (
-    <>
+      <View style={styles.container}>
       <FlatList
         data={pessoas}
         keyExtractor={(p) => p.id}
         renderItem={renderItem}
         contentContainerStyle={styles.listContainer}
-        ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma pessoa cadastrada</Text>} />
+        ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma pessoa cadastrada</Text>} 
+      />
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => navigation.navigate('PessoaForm')}
+      >
+        <Ionicons name="add" size={32} color="white" />
+      </TouchableOpacity>
       <TouchableOpacity onPress={async () => {
         await clearAllStorage();
         Alert.alert('Pronto', 'Todo o armazenamento foi limpo.');
       }}>
         <Text>Limpar tudo</Text>
       </TouchableOpacity>
-    </>
+    </View>
   );
 }
