@@ -3,26 +3,23 @@ import { Image, StyleSheet } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItemList,
-  DrawerToggleButton
+  DrawerItemList
 } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 
-import PessoasStack     from './PessoasStack';
-import ReunioesStack    from './ReunioesStack';
-import { COLORS, drawerNavigatorStyle } from '../styles/drawerStyles';
+import PessoasStack  from './PessoasStack';
+import ReunioesStack from './ReunioesStack';
+import styles from '../styles/drawerStyles';
+
 
 const Drawer = createDrawerNavigator();
 
 export default function AppDrawer() {
   return (
     <Drawer.Navigator
-      initialRouteName="Reuniões"
-      drawerContent={(props) => (
-        <DrawerContentScrollView
-          {...props}
-          contentContainerStyle={styles.drawerScroll}
-        >
+      initialRouteName="Reunioes"
+      drawerContent={props => (
+        <DrawerContentScrollView contentContainerStyle={styles.drawerScroll}>
           <Image
             source={{
               uri:
@@ -33,35 +30,32 @@ export default function AppDrawer() {
           <DrawerItemList {...props} />
         </DrawerContentScrollView>
       )}
-      drawerStyle={drawerNavigatorStyle.drawerStyle}
-      drawerContentOptions={drawerNavigatorStyle.drawerContentOptions}
       screenOptions={({ route }) => ({
         headerShown: false,
         drawerIcon: ({ color, size }) => {
+          // map our ASCII route keys to icons
           const icons = {
-            Reuniões: 'calendar-outline',
+            Reunioes: 'calendar-outline',
             Pessoas:  'people-outline',
           };
           return <Ionicons name={icons[route.name]} size={size} color={color} />;
         },
       })}
+      drawerStyle={styles.drawerStyle}
+      drawerContentOptions={styles.drawerContentOptions}
     >
-      <Drawer.Screen name="Reuniões" component={ReunioesStack} />
-      <Drawer.Screen name="Pessoas"  component={PessoasStack} />
+      {/* route name is ASCII-safe, but drawerLabel is accented */}
+      <Drawer.Screen
+        name="Reunioes"
+        component={ReunioesStack}
+        options={{ drawerLabel: 'Reuniaes' }}
+      />
+
+      <Drawer.Screen
+        name="Pessoas"
+        component={PessoasStack}
+        options={{ drawerLabel: 'Pessoas' }}
+      />
     </Drawer.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  drawerScroll: {
-    backgroundColor: COLORS.darkBlue,
-    flex: 1,
-  },
-  logo: {
-    width: 160,
-    height: 60,
-    resizeMode: 'contain',
-    alignSelf: 'center',
-    marginVertical: 20,
-  },
-});

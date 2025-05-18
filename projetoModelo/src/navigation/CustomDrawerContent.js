@@ -29,25 +29,3 @@ export default function CustomDrawerContent(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  scroll: {
-    backgroundColor: COLORS.darkBlue,
-  },
-  logoWrapper: {
-    height: 140,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: COLORS.lightBlue,
-    marginBottom: 8,
-  },
-  logo: {
-    width: 140,
-    height: 60,
-    resizeMode: 'contain',
-  },
-  itemsWrapper: {
-    flex: 1,
-    backgroundColor: COLORS.darkBlue,
-    paddingTop: 8,
-  },
-});

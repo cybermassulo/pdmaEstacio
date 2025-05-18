@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native'
+
 export const COLORS = {
   darkBlue:  '#00557f',  // fundo itens não selecionados
   lightBlue: '#006bb3',  // cabeçalhos & drawer toggle
@@ -5,7 +7,7 @@ export const COLORS = {
   white:     '#ffffff',
 };
 
-export const drawerNavigatorStyle = {
+export default StyleSheet.create({
   drawerStyle: {
     backgroundColor: COLORS.darkBlue,
     width: 260,
@@ -24,4 +26,45 @@ export const drawerNavigatorStyle = {
       borderRadius: 4,
     },
   },
-};
+  drawerScroll: {
+    backgroundColor: '#00557f', // Estácio dark blue
+    flex: 1,
+  },
+  logo: {
+    width: 160,
+    height: 60,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    marginVertical: 20,
+  },
+  drawerContentOptions: {
+    activeTintColor: '#00557f',
+    inactiveTintColor: '#ffffff',
+    activeBackgroundColor: '#fecd02',
+    inactiveBackgroundColor: 'transparent',
+    labelStyle: {
+      fontSize: 16,
+      fontWeight: '600',
+    },
+    itemStyle: {
+      marginVertical: 6,
+      borderRadius: 4,
+    },
+  },
+   scroll: {
+    backgroundColor: COLORS.darkBlue,
+  },
+  logoWrapper: {
+    height: 140,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.lightBlue,
+    marginBottom: 8,
+  },
+  itemsWrapper: {
+    flex: 1,
+    backgroundColor: COLORS.darkBlue,
+    paddingTop: 8,
+  },
+});
+
