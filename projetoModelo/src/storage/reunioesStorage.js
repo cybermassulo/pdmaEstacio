@@ -1,4 +1,3 @@
-// src/storage/reunioesStorage.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const REUNIOES_KEY = '@app:reunioes';

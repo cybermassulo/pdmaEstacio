@@ -1,4 +1,3 @@
-// src/styles/drawerStyles.js
 export const COLORS = {
   darkBlue:  '#00557f',  // fundo itens não selecionados
   lightBlue: '#006bb3',  // cabeçalhos & drawer toggle
