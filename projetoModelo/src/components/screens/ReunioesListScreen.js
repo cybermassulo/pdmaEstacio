@@ -32,7 +32,7 @@ export default function ReunioesListScreen({ navigation }) {
   const handleDelete = id => {
     Alert.alert(
       'Confirmar exclusão',
-      'Deseja realmente excluir este Reunião?',
+      'Deseja realmente excluir esta Reunião?',
       [
         { text: 'Cancelar', style: 'cancel' },
         {

@@ -11,7 +11,7 @@ import {
 import styles from '../../styles/ReuniaoDetailScreenStyles';
 import {
   loadReunioes,
-  deleteReuniao
+  saveReunioes
 } from '../../storage/reunioesStorage';
 import { loadPessoas } from '../../storage/pessoasStorage';
 import { formatDateTime } from '../../utils/dateHelpers';
@@ -58,8 +58,10 @@ export default function ReuniaoDetailScreen({ route, navigation }) {
           text: 'Sim',
           style: 'destructive',
           onPress: async () => {
-            await deleteReuniao(reuniaoId);
-            navigation.popToTop();
+            const all = await loadReunioes()
+            const filtered = all.filter(r => r.id !== reuniaoId)
+            await saveReunioes(filtered)
+            navigation.goBack()
           }
         }
       ]
