@@ -27,7 +27,7 @@ export default StyleSheet.create({
     },
   },
   drawerScroll: {
-    backgroundColor: '#00557f', // Estácio dark blue
+    backgroundColor: 'rgb(0, 107, 179)',
     flex: 1,
   },
   logo: {
@@ -62,9 +62,7 @@ export default StyleSheet.create({
     marginBottom: 8,
   },
   itemsWrapper: {
-    flex: 1,
-    backgroundColor: COLORS.darkBlue,
-    paddingTop: 8,
+    backgroundColor: 'rgb(0, 107, 179)',
   },
 });
 

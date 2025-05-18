@@ -1,23 +1,22 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList
 } from '@react-navigation/drawer';
-import { COLORS } from '../styles/drawerStyles';
+import LogoImage from '../img/logo.png';
+import styles from '../styles/drawerStyles';
 
 export default function CustomDrawerContent(props) {
+  
   return (
     <DrawerContentScrollView
       {...props}
-      contentContainerStyle={styles.scroll}
+      contentContainerStyle={styles.drawerScroll}
     >
       <View style={styles.logoWrapper}>
         <Image
-          source={{
-            uri:
-              'https://logodownload.org/wp-content/uploads/2014/12/estacio-logo-0.png'
-          }}
+          source={LogoImage}
           style={styles.logo}
         />
       </View>

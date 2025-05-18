@@ -10,7 +10,8 @@ import { Ionicons } from '@expo/vector-icons';
 import PessoasStack  from './PessoasStack';
 import ReunioesStack from './ReunioesStack';
 import styles from '../styles/drawerStyles';
-
+import LogoImage from '../img/logo.png';
+import CustomDrawerContent from './CustomDrawerContent';
 
 const Drawer = createDrawerNavigator();
 
@@ -18,37 +19,33 @@ export default function AppDrawer() {
   return (
     <Drawer.Navigator
       initialRouteName="Reunioes"
-      drawerContent={props => (
-        <DrawerContentScrollView contentContainerStyle={styles.drawerScroll}>
-          <Image
-            source={{
-              uri:
-                'https://logodownload.org/wp-content/uploads/2014/12/estacio-logo-0.png'
-            }}
-            style={styles.logo}
-          />
-          <DrawerItemList {...props} />
-        </DrawerContentScrollView>
-      )}
+      drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={({ route }) => ({
         headerShown: false,
         drawerIcon: ({ color, size }) => {
-          // map our ASCII route keys to icons
           const icons = {
             Reunioes: 'calendar-outline',
             Pessoas:  'people-outline',
           };
           return <Ionicons name={icons[route.name]} size={size} color={color} />;
         },
+        drawerActiveTintColor: '#FFFFFF',   
+        drawerInactiveTintColor: '#CCCCCC',
+        drawerLabelStyle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
+    drawerStyle: {
+      backgroundColor: 'rgb(0, 107, 179)',
+    },
       })}
       drawerStyle={styles.drawerStyle}
       drawerContentOptions={styles.drawerContentOptions}
     >
-      {/* route name is ASCII-safe, but drawerLabel is accented */}
       <Drawer.Screen
         name="Reunioes"
         component={ReunioesStack}
-        options={{ drawerLabel: 'Reuniaes' }}
+        options={{ drawerLabel: 'Reuniões' }}
       />
 
       <Drawer.Screen
