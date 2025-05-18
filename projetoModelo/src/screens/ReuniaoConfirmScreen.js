@@ -37,7 +37,7 @@ export default function ReuniaoConfirmScreen({ route, navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Revise seu agendamento</Text>
+      <Text style={styles.title}>Revise seu Reunião</Text>
 
       <Text style={styles.label}>Data e Hora:</Text>
       <Text style={styles.value}>{formatDateTime(reuniaoDraft.dateTime)}</Text>

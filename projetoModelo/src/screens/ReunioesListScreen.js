@@ -32,7 +32,7 @@ export default function ReunioesListScreen({ navigation }) {
   const handleDelete = id => {
     Alert.alert(
       'Confirmar exclusão',
-      'Deseja realmente excluir este agendamento?',
+      'Deseja realmente excluir este Reunião?',
       [
         { text: 'Cancelar', style: 'cancel' },
         {
@@ -97,7 +97,7 @@ export default function ReunioesListScreen({ navigation }) {
         renderItem={renderItem}
         ListEmptyComponent={
           <Text style={styles.emptyText}>
-            Nenhum agendamento encontrado.
+            Nenhuma Reunião encontrado.
           </Text>
         }
       />

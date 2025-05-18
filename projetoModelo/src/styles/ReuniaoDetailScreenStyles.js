@@ -2,42 +2,70 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#F2F4F8'
   },
-  section: {
-    marginBottom: 20,
+  notFound: {
+    fontSize: 18,
+    color: '#888',
+    textAlign: 'center',
+    marginTop: 40
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 16
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 24,
+    // sombra iOS
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    // elevação Android
+    elevation: 3
   },
   label: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '600',
     color: '#555',
-    marginBottom: 4,
+    marginTop: 12
   },
   value: {
     fontSize: 16,
-    color: '#222',
+    color: '#333',
+    marginTop: 4,
+    lineHeight: 22
   },
-  buttonRow: {
+  buttonsRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 30,
+    justifyContent: 'space-between'
   },
   button: {
     flex: 1,
-    marginHorizontal: 8,
-    backgroundColor: '#007AFF',
+    marginHorizontal: 4,
     paddingVertical: 12,
     borderRadius: 6,
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  buttonCancel: {
-    backgroundColor: '#D32F2F',
+  editButton: {
+    backgroundColor: '#34C759'
+  },
+  deleteButton: {
+    backgroundColor: '#FF3B30'
+  },
+  backButton: {
+    backgroundColor: '#007AFF'
   },
   buttonText: {
-    color: '#FFF',
+    color: '#fff',
     fontSize: 16,
-    fontWeight: '500',
-  },
+    fontWeight: '600'
+  }
 });
